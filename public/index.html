@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js" ng-app="meanMapApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Mean Map App</title>
+    <meta name="description" content="An Map mean application example">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- HOLDER JS -->
+    <script src="../bower_components/holderjs/holder.js"></script>
+
+    <!-- GOOGLE MAPS API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBeUQU4H4mI3PqpzJfhbdHdr5n03ajQ9U4"></script>
+
+    <!-- Modernizr -->
+    <script src="../bower_components/modernizr/bin/modernizr"></script>
+
+    <!-- JS SOURCES -->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    <script src="../bower_components/angularjs-geolocation/dist/angularjs-geolocation.min.js"></script>
+
+    <script src="js/app.js" charset="utf-8"></script>
+    <script src="js/addCtrl.js" charset="utf-8"></script>
+    <script src="js/gservice.js" charset="utf-8"></script>
+</head>
+<body ng-controller="addCtrl">
+    <div class="container">
+        <div class="header">
+            <ul class="nav nav-pills pull-right">
+                <li active><a href="">Join the Team</a></li>
+                <li disabled><a href="">Find Teammates</a></li>
+            </ul>
+            <h3 class="text-muted">My Mean Map App</h3>
+        </div>
+        <!-- Map and side panel -->
+        <div class="row content">
+            <!-- Google Map -->
+            <div class="col-md-7">
+                <div id="map"></div>
+            </div>
+
+            <!-- Side Panel -->
+            <div class="col-md-5">
+                <div class="panel panel-default">
+                    <!-- Panel Title -->
+                    <div class="panel-heading">
+                        <h2 class="panel-title text-center">Join The Mean Team!<span class="glyphicon glyphicon-map-marker"></span></h2>
+                    </div>
+                    <!-- Panel Body -->
+                    <div class="panel-body">
+                        <!-- Creates Form (novalidate disables HTML validation, Angular will control) -->
+                        <form name="addForm" novalidate>
+                            <!-- Text Boxes and other user inputs. Note ng-model binds the values to Angular $scope -->
+                            <div class="form-group">
+                                <label for="username">Username <span class="badge">All fields required</span></label>
+                                <input type="text" class="form-control" id="username" placeholder="leogsouza" ng-model="formData.username" required />
+                            </div>
+                            <label class="radio control-label">Gender</label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="radiomale" value="Male" ng-model="formData.gender" />
+                                    Male
+                                </label>
+                            </div>
+                            <div class="radio" required>
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="radiofemale" value="Female" ng-model="formData.gender">
+                                    Female
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="radioother" value="What's it to ya?" ng-model="formData.gender">
+                                    What's it to ya
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="number" id="age" class="form-control" placeholder="34" ng-model="formData.age">
+                            </div>
+                            <div class="form-group">
+                                <label for="language">Favorite Language</label>
+                                <input type="text" id="language" class="form-control" placeholder="Java" ng-model="formData.favlang">
+                            </div>
+                            <div class="form-group">
+                                <label for="latitude">Latitude</label>
+                                <input type="text" class="form-control" id="latitude" value="-23.5864145" ng-model="formData.latitude">
+                            </div>
+                            <div class="form-group">
+                                <label for="longitude">Longitude</label>
+                                <input type="text" class="form-control" id='longitude' value="-46.6840772" ng-model="formData.longitude">
+                            </div>
+                            <div class="form-group">
+                                <label for="verified">HTML5 Verified Location? <span><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-refresh"></span></button></span></label>
+                                <input type="text" class="form-control" id="verified" placeholder="Nope (Thanks for spamming my map...)" ng-model="formData.htmlverified" readonly>
+                            </div>
+                            <button type="submit" class="btn btn-danger btn-block" ng-disabled="addForm.$invalid" ng-click="createUser()">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <div class="footer">
+            <p class="text-center"><span class="glyphicon glyphicon-check"></span> Created By Leonardo Souza</p>
+        </div>
+    </div>
+</body>
+</html>
