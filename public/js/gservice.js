@@ -83,7 +83,7 @@ angular.module('gservice', [])
 
             // Uses the selected lat, long as stating point
             var myLatLng = {lat: parseFloat(selectedLat), lng: parseFloat(selectedLong)};
-            console.log(myLatLng);
+            
             // If map has not been created already...
             if(!map) {
 

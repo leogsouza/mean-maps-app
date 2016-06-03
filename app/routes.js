@@ -35,4 +35,70 @@ module.exports = function (app) {
             }
         });
     });
+
+    // Retrieves JSON records for all users who meet a certain set of query conditions
+    app.post('/query/', function(req, res) {
+
+        // Grab all of the parameters from the body
+        var lat         = req.body.latitude;
+        var long        = req.body.longitude;
+        var distance    = req.body.distance;
+        var male        = req.body.male;
+        var female      = req.body.female;
+        var other       = req.body.other;
+        var minAge      = req.body.minAge;
+        var maxAge      = req.body.maxAge;
+        var favlang     = req.body.favlang;
+        var htmlverified    = req.body.verified;
+
+        // Opens a generic Mongoose query. Depending on the post body we will...
+        var query = User.find({});
+
+        // ...include filter by max distance (converting miles to meters)
+        if(distance) {
+
+            // Using MongoDB's geospatial querying features. (Note how coordinates are set [long, lat])
+            query = query.where('location').near({ center: {type: 'Point', coordinates: [long, lat]},
+
+                // Converting meters to miles. Specifying spherical geometry (for globe)
+                maxDistance: distance * 1609.34, spherical: true});
+        }
+
+        // ...include filter by gender (all options)
+        if(male || female || other) {
+            query.or([{ 'gender': male }, { 'gender': female }, { 'gender': other }]);
+        }
+
+        // ...include filter by Min Age
+        if(minAge) {
+            query = query.where('age').gte(minAge);
+        }
+
+        // ..include filter by Max Age
+        if(maxAge) {
+            query = query.where('age').lte(maxAge);
+        }
+
+        // ...include filter by Favorite Language
+        if(favlang) {
+            query = query.where('favlang').equals(favlang);
+        }
+
+        // ...include filter by HTML5 Verified Locations
+        if(htmlverified) {
+            query = query.where('htmlverified').equals('Yep (Thanks for giving us real data!)');
+        }
+
+
+
+        // Execute Query and return Query results
+        query.exec(function(err, users) {
+            if(err){
+                console.log('Error ao executar a busca', err);
+                res.send(err);
+            }
+            // If no errors respond with a JSON of all users that meet the criteria
+            res.json(users);
+        })
+    });
 };
