@@ -10,6 +10,7 @@ module.exports = function (app) {
     app.get('/users', function (req, res) {
 
         // Uses Mongoose schema to run the search ( empty conditions)
+        console.log('teste reload');;
         var query = User.find({});
         query.exec(function (err, users) {
             if (err)
@@ -49,7 +50,7 @@ module.exports = function (app) {
         var minAge      = req.body.minAge;
         var maxAge      = req.body.maxAge;
         var favlang     = req.body.favlang;
-        var htmlverified    = req.body.verified;
+        var htmlverified    = req.body.htmlverified;
 
         // Opens a generic Mongoose query. Depending on the post body we will...
         var query = User.find({});
@@ -98,7 +99,8 @@ module.exports = function (app) {
                 res.send(err);
             }
             // If no errors respond with a JSON of all users that meet the criteria
+            console.log('users filtered',users);
             res.json(users);
-        })
+        });
     });
 };

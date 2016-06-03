@@ -1,5 +1,5 @@
 // Declares the initial Angular module "meanMapApp". Module grabs other controllers and services.
-var app = angular.module('meanMapApp', ['addCtrl', 'geolocation', 'gservice', 'ngRoute'])
+var app = angular.module('meanMapApp', ['addCtrl', 'queryCtrl', 'geolocation', 'gservice', 'ngRoute'])
 
     // Configures Angular routing -- showing the relevant view and controller when needed
     .config(function($routeProvider) {
@@ -9,6 +9,7 @@ var app = angular.module('meanMapApp', ['addCtrl', 'geolocation', 'gservice', 'n
             controller: 'addCtrl',
             templateUrl: 'partials/addForm.html'
         }).when('/find', {
+            controller: 'queryCtrl',
             templateUrl: 'partials/queryForm.html'
         }).otherwise({redirectTo: '/join'});
     });
