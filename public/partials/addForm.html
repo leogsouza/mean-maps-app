@@ -1,0 +1,59 @@
+<div class="col-md-5">
+    <div class="panel panel-default">
+        <!-- Panel Title -->
+        <div class="panel-heading">
+                <h2 class="panel-title text-center">Join The Mean Team!<span class="glyphicon glyphicon-map-marker"></span></h2>
+        </div>
+        <!-- Panel Body -->
+        <div class="panel-body">
+            <!-- Creates Form (novalidate disables HTML validation, Angular will control) -->
+            <form name="addForm" novalidate>
+                <!-- Text Boxes and other user inputs. Note ng-model binds the values to Angular $scope -->
+                <div class="form-group">
+                    <label for="username">Username <span class="badge">All fields required</span></label>
+                    <input type="text" class="form-control" id="username" placeholder="leogsouza" ng-model="formData.username" required />
+                </div>
+                <label class="radio control-label">Gender</label>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="radiomale" value="Male" ng-model="formData.gender" />
+                        Male
+                    </label>
+                </div>
+                <div class="radio" required>
+                    <label>
+                            <input type="radio" name="optionsRadios" id="radiofemale" value="Female" ng-model="formData.gender">
+                            Female
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="radioother" value="What's it to ya?" ng-model="formData.gender">
+                        What's it to ya
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" class="form-control" placeholder="34" ng-model="formData.age">
+                </div>
+                <div class="form-group">
+                    <label for="language">Favorite Language</label>
+                    <input type="text" id="language" class="form-control" placeholder="Java" ng-model="formData.favlang">
+                </div>
+                <div class="form-group">
+                    <label for="latitude">Latitude</label>
+                    <input type="text" class="form-control" id="latitude" value="-23.5864145" ng-model="formData.latitude">
+                </div>
+                <div class="form-group">
+                    <label for="longitude">Longitude</label>
+                    <input type="text" class="form-control" id='longitude' value="-46.6840772" ng-model="formData.longitude">
+                </div>
+                <div class="form-group">
+                    <label for="verified">HTML5 Verified Location? <span><button class="btn btn-default btn-xs" ng-click="refreshLoc()"><span class="glyphicon glyphicon-refresh"></span></button></span></label>
+                    <input type="text" class="form-control" id="verified" placeholder="Nope (Thanks for spamming my map...)" ng-model="formData.htmlverified" readonly>
+                </div>
+                <button type="submit" class="btn btn-danger btn-block" ng-disabled="addForm.$invalid" ng-click="createUser()">Submit</button>
+            </form>
+        </div>
+    </div>
+    </div>
